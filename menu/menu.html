@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菜单</title>
+    <link rel="stylesheet" href="./lib/layui-v2.5.6/layui/css/layui.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">css</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-this"><a data-id='index' href="index.html" target="framebox">零散知识点</a></dd>
+                        <dd><a data-id='images' href="images.html" target="framebox">Hover图片</a></dd>
+                        <dd><a data-id='hover' href="hover.html" target="framebox">Hover杂</a></dd>
+                        <dd><a data-id='inlineblock' href="inlineblock.html" target="framebox">inline-block</a></dd>
+                        <dd><a data-id='animate' href="animate.html" target="framebox">动画</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">js</a>
+                    <dl class="layui-nav-child">
+                        <dd><a data-id='input' href="input.html" target="framebox">输入框有关</a></dd>
+                        <dd><a data-id='array' href="array.html" target="framebox">数组</a></dd>
+                        <dd><a data-id='ajax' href="ajax.html" target="framebox">ajax</a></dd>
+                        <dd><a data-id='function' href="function.html" target="framebox">事件</a></dd>
+                        <dd><a data-id='function1' href="function1.html" target="framebox">数字单位转换</a></dd>
+                        <dd><a data-id='function2' href="function2.html" target="framebox">echart图表</a></dd>
+                        <dd><a data-id='lunarCalendar' href="lunarCalendar.html" target="framebox">农历&时间</a></dd>
+                        <dd><a data-id='swiper' href="swiper.html" target="framebox">轮播图</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="./images/images01.jpg" download>下载</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">大数据</a></li>
+            </ul>
+        </div>
+
+        <div class="show">
+            <div class="tab-label">
+                <ul>
+                    <li data-id="one" class="label-item active">
+                        <a href="index.html" target="framebox">零散知识点</a>
+                        <span class="close">X</span>
+                    </li>
+                </ul>
+            </div>
+            <iframe id="iframebox1" name="framebox" src="index.html" frameborder='none'></iframe>
+        </div>
+    </div>
+    <div class="container">
+        <div class="menutop">
+            <ul class="layui-nav">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item">
+                    <a href="javascript:;">菜单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="index.html" target="frameboxb">零散知识点</a></dd>
+                        <dd><a href="images.html" target="frameboxb">选项2</a></dd>
+                        <dd><a href="html3.html" target="frameboxb">跳转</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">菜单一</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="html1.html" target="frameboxb">移动模块</a></dd>
+                        <dd><a href="hover.html" target="frameboxb">后台模版</a></dd>
+                        <dd><a href="html3.html">电商平台</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="javascript:;">产品</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">大数据</a></li>
+            </ul>
+        </div>
+        <div class="showbottom">
+            <iframe name="frameboxb" src="index.html" frameborder='none'></iframe>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/layui-v2.5.6/layui/layui.all.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $('#iframebox1').bind('mousewheel', function(e) {
+        var wheeld = e.originalEvent.wheelDelta;
+        console.log(wheeld)
+        e.preventDefault();
+    })
+    $('a[target="framebox"]').click(function() {
+        $('.tab-label ul li').removeClass('active')
+        var itemName = $(this).text().replace(/[\r\n]/g, "").replace(/\ +/g, "");
+        var itemHref = $(this).attr('href');
+        var itemTarget = $(this).attr('target');
+        var dataId = $(this).attr('data-id');
+        var li = `<li data-id="${dataId}" class="label-item active">
+                        <a href="${itemHref}" target="${itemTarget}">
+                            ${itemName} 
+                        </a>
+                        <span class="close">X</span>
+                    </li>`;
+        var labelItems = [];
+        var labelItem;
+        var isExist;
+        $('.tab-label ul li a').each(function() {
+            var that = $(this)
+            console.log(that.parent().attr('data-id'))
+            if (that.parent().attr('data-id') == dataId) {
+                that.parent().addClass('active')
+            }
+            labelItem = that.text().replace(/[\r\n]/g, "").replace(/\ +/g, "")
+            labelItems.push(labelItem) //去回车换行、空格
+            isExist = labelItems.some(function(item, index) {
+                return item == itemName
+            })
+        })
+        if (!isExist) {
+            $('.tab-label ul').append(li);
+        }
+    })
+    $('.tab-label ul').mouseenter(function() {
+        $('.tab-label ul li').bind('click', function() {
+            $(this).addClass('active').siblings().removeClass('active')
+        })
+        $('.tab-label ul li span').bind('click', function() {
+            var framesrc = $(this).parent().next().find('a').attr('href')
+            if (framesrc) {
+                //点击中间元素，该元素后一项加active
+                $(this).parent().siblings().removeClass('active')
+                $(this).parent().next().addClass('active')
+                $(this).parent().remove()
+                $('#iframebox1').attr('src', framesrc)
+            } else {
+                //点击的是末尾元素,该元素前一项加active
+                var framesrc = $(this).parent().prev().find('a').attr('href')
+                $('#iframebox1').attr('src', framesrc)
+                var framesrc = $(this).parent().prev().find('a').attr('href')
+                $(this).parent().siblings().removeClass('active')
+                $(this).parent().prev().addClass('active')
+                $(this).parent().remove()
+            }
+        })
+    })
+</script>

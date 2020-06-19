@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lib/layui-v2.5.6/layui/css/layui.css">
+    <title>Document</title>
+    <style>
+        #swiper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .item {
+            width: 100vw;
+            height: 500px;
+            float: left;
+            animation: move 20s linear infinite;
+        }
+
+        @keyframes move {
+            100% {
+                transform: translateX(-100%);
+            }
+
+        }
+
+        .item img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .push {
+            width: 100%;
+            height: 200px;
+            text-align: center;
+            background-color: #ccc;
+            overflow: hidden;
+        }
+
+        .push .itema {
+            width: 70%;
+            height: 100%;
+            transition: all 0.5s ease-in;
+            background-color: #fff;
+            margin: auto;
+        }
+
+        .push .itema p {
+            color: #111;
+            height: 25%;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="swiper">
+        <div class="swiper_wrapper layui-clear">
+            <div class="item">
+                <img src="images/images01.jpg">
+            </div>
+            <div class="item">
+                <img src="images/images02.jpg">
+            </div>
+            <div class="item">
+                <img src="images/images02.jpg">
+            </div>
+            <div class="item">
+                <img src="images/images03.jpg">
+            </div>
+            <div class="item">
+                <img src="images/images04.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="push">
+        <div class="itema">
+            <p>这是第一条这是第一条</p>
+            <p>这是第一条这是第一条</p>
+            <p>这是第一条这是第一条</p>
+            <p>这是第一条这是第一条</p>
+        </div>
+        <div class="itema">
+            <p>这是第一条这是第二条</p>
+            <p>这是第二条这是第二条</p>
+            <p>这是第二条这是第二条</p>
+            <p>这是第二条这是第二条</p>
+        </div>
+        <div class="itema">
+            <p>这是第三条这是第三条</p>
+            <p>这是第三条这是第三条</p>
+            <p>这是第三条这是第三条</p>
+            <p>这是第三条这是第三条</p>
+        </div>
+        <div class="itema">
+            <p>这是第四条这是第四条</p>
+            <p>这是第四条这是第四条</p>
+            <p>这是第四条这是第四条</p>
+            <p>这是第四条这是第四条</p>
+        </div>
+    </div>
+</body>
+<script src="lib/jquery/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var itemW = $('#swiper .item').width();
+        var arr = $('#swiper .item');
+        var length = arr.length;
+        console.log(length)
+        $('.swiper_wrapper').css('width', itemW * length + 'px');
+
+        var heightI = $('.push .itema').height();
+        var length = $('.push .itema').length;
+        let i = 0;
+        setInterval(() => {
+            i++;
+            // if (i >= length) {
+            // i = 0;
+            // }
+            heightITem = i * heightI;
+            $('.push .itema').css({ transform: `translateY(-${heightITem}px)` })
+            // $('.push').find('div.itema:first').appendTo($('.push'))
+        }, 2000);
+    })
+    function push() {
+        $('.push .itema').css({ transform: 'translateY(-200px)' })
+    }
+</script>
+
+</html>

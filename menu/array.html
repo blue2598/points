@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./lib/layui-v2.5.6/layui/css/layui.css">
+    <title>数组</title>
+    <style>
+        .code {
+            height: 400px;
+            overflow: scroll;
+        }
+        
+        .layui-card-header {
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding:10px;margin: 10px;">
+        <p class="layui-card-header">数组遍历</p>
+        <p class="layui-card-header">for循环</p>
+        <p class="layui-card-header">foreach循环</p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                没有返回值 不能跳出循环
+                arr.forEach((item,index,array)=>{
+                    //执行代码
+                })
+                //参数：value数组中的当前项, index当前项的索引, array原始数组；
+                //数组中有几项，那么传递进去的匿名回调函数就需要执行几次；
+            </pre>
+        </p>
+        <p class="layui-card-header">map循环</p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                arr.map(function(value,index,array){
+                    　　//do something
+                    　　return XXX
+                    })
+            </pre>
+        </p>
+        <p class="layui-card-header">for of循环 可以正确响应break、continue和return语句，不支持对象的遍历，但提供 ①Object.keys() ②Object.values() ③Object.entries()</p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                for (var value of myArray) {
+                    console.log(value);
+                    }
+                    let obj = {
+                        '未完成': '2',
+                        'sadsa': '34'
+                    }
+                    for (var ee of obj) {
+                        console.log(ee) // Uncaught TypeError: obj is not iterable
+                    }
+                    for (var eee of Object.entries(obj)) {
+                            console.log(eee) //数组
+                        }
+            </pre>
+        </p>
+        <p class="layui-card-header">for in循环 因为它的无序性，所以for-in循环我们通常用于对象或json中</p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                for (var i in myArray) {  //i 是key值，为字符串型数字，不能直接进行几何运算
+                    console.log(myArray[i]);
+                    }
+            </pre>
+        </p>
+        <p class="layui-card-header">keys，values，entries</p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                for (let index of ['a', 'b'].keys()) {
+                    console.log(index);
+                    }
+                    // 0
+                    // 1
+                    for (let elem of ['a', 'b'].values()) {
+                    console.log(elem);
+                    }
+                    // 'a'
+                    // 'b'
+                    for (let [index, elem] of ['a', 'b'].entries()) {
+                    console.log(index, elem);
+                    }
+            </pre>
+        </p>
+        <p class="layui-card-header">every遍历</p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                var arr = [ 1, 2, 3, 4, 5, 6 ]; 
+                arr.every( function( item, index, array ){ 
+                    return item > 3; //每一项都true  返回true
+                }); 
+            </pre>
+        </p>
+        <p class="layui-card-header">some遍历</p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                var arr = [ 1, 2, 3, 4, 5, 6 ]; 
+                arr.some( function( item, index, array ){ 
+                    return item > 3; //有一项true  返回true
+                }); 
+            </pre>
+        </p>
+        <p class="layui-card-header">reduce() 方法接收一个函数作为累加器（accumulator），数组中的每个值（从左到右）开始缩减，最终为一个值。</p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                [0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, index, array){
+                    return previousValue + currentValue;
+                   },5);
+            </pre>
+        </p>
+        <p class="layui-card-header">reduceRight reduceRight()方法的功能和reduce()功能是一样的，不同的是reduceRight()从数组的末尾向前将数组中的数组项做累加。</p>
+        <p class="layui-card-header">find()方法返回数组中符合测试函数条件的第一个元素。否则返回undefined </p>
+        <p class="layui-card-body">
+            <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+                var stu = [
+                {
+                    name: '张三',
+                    gender: '男',
+                    age: 20
+                },
+                {
+                    name: '王小毛',
+                    gender: '男',
+                    age: 20
+                },
+                {
+                    name: '李四',
+                    gender: '男',
+                    age: 20
+                }
+            ]
+            function getStu(element){
+                return element.name == '李四'
+                stu.find((element) => (element.name == '李四'))//es6
+             }
+             stu.find(getStu)
+            </pre>
+        </p>
+        <p class="layui-card-header">findIndex</p>
+        <p class="layui-card-header">array=[1,2,3,4,2,4,1,3,6,10]</p>
+        <button data-type='splice' type="button " class="layui-btn layui-btn-normal ">splice数组去重</button>
+        <button data-type='indexof' type="button " class="layui-btn layui-btn-normal ">indexof数组去重</button>
+        <button data-type='set' type="button " class="layui-btn layui-btn-normal ">Es6 set数组去重</button>
+        <div class="code ">
+            <pre class="layui-code " lay-title="JavaScript " lay-skin="notepad ">
+                var array = [1, 2, 3, 4, 2, 4, 1, 3, 6, 10];
+                // 利用splice去重
+                function uniqueSplice(arr) {
+                    for (var i = 0; i < arr.length; i++) {
+                        for (var j = i + 1; j < arr.length; j++) {
+                            if (arr[i] == arr[j]) {
+                                //如果第一个等于第二个，splice方法删除第二个
+                                arr.splice(j, 1);
+                                j--;
+                            }
+                        }
+                    }
+                    return arr;
+                }
+                // 利用indexOf
+                function uniqueIndexof(arr) {
+                    //一个新的数组 
+                    var arrs = [];
+                    //遍历当前数组 
+                    for (var i = 0; i < array.length; i++) {
+                        //如果临时数组里没有当前数组的当前值，则把当前值push到新数组里面 
+                        if (arrs.indexOf(array[i]) == -1) {
+                            arrs.push(array[i])
+                        };
+                    }
+                    return arrs;
+                }
+                // ES6中利用Set去重
+                function uniqueSet(arr) {
+                    return Array.from(new Set(arr))
+                }
+            </pre>
+        </div>
+        <p class="layui-card-header ">对象数组互相转化 obj={'未完成': 5,'已完成': 8,'待确认': 4,'已取消': 6}</p>
+        <p class="layui-card-header ">shuzu:[5,8,4,6]</p>
+        <p class="layui-card-header ">shuzu1:[{未完成: 5},{已完成: 8},{待确认: 4},{已取消: 6}]</p>
+        <div class="code ">
+            <pre class="layui-code " lay-title="JavaScript " lay-skin="notepad ">
+                // 对象转数组
+                function objToarray() {
+                    var shuzu = [];
+                    var shuzu1 = [];
+                    var shuzu3 = [];
+                    let obj = {
+                        '未完成': 5,
+                        '已完成': 8,
+                        '待确认': 4,
+                        '已取消': 6
+                    };
+                    for (let i in obj) {
+                        shuzu.push(obj[i])
+                        let o = {};
+                        o[i] = obj[i]
+                        shuzu1.push(o)
+                        shuzu3.push({
+                            [i]: obj[i]
+                        })
+                    }
+                }
+                // 数组转对象
+                function arrayToobj() {
+                    let array = [{
+                        未完成: 5
+                    }, {
+                        已完成: 8
+                    }, {
+                        待确认: 4
+                    }, {
+                        已取消: 6
+                    }];
+                    let obj = {}
+                    for (let i in array) {
+                        obj[i] = array[i]
+                    }
+                    return obj
+                }
+                // 或者
+                function arrayToobj() {
+                    let array = [{
+                        未完成: 5
+                    }, {
+                        已完成: 8
+                    }, {
+                        待确认: 4
+                    }, {
+                        已取消: 6
+                    }];
+                    return Object.assign({}, array)
+                }
+            </pre>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./lib/jquery/jquery.js "></script>
+<script>
+    var array = [1, 2, 3, 4, 2, 4, 1, 3, 6, 10];
+    // 利用splice去重
+    function uniqueSplice(arr) {
+        for (var i = 0; i < arr.length; i++) {
+            for (var j = i + 1; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
+                    //如果第一个等于第二个，splice方法删除第二个
+                    arr.splice(j, 1);
+                    j--;
+                }
+            }
+        }
+        return arr;
+    }
+    // 利用indexOf
+    function uniqueIndexof(arr) {
+        //一个新的数组 
+        var arrs = [];
+        //遍历当前数组 
+        for (var i = 0; i < arr.length; i++) {
+            //如果临时数组里没有当前数组的当前值，则把当前值push到新数组里面 
+            if (arrs.indexOf(arr[i]) == -1) {
+                arrs.push(arr[i])
+            };
+        }
+        return arrs;
+    }
+    // ES6中利用Set去重
+    function uniqueSet(arr) {
+        return Array.from(new Set(arr))
+    }
+    $('button').click(function() {
+            var dataType = $(this).attr('data-type');
+            if (dataType == "splice ")
+                alert(uniqueSplice(array))
+            if (dataType == "indexof ")
+                alert(uniqueIndexof(array))
+            if (dataType == "set ")
+                alert(uniqueSet(array))
+        })
+        // 对象转数组
+    function objToarray() {
+        var shuzu = [];
+        var shuzu1 = [];
+        var shuzu3 = [];
+        let obj = {
+            '未完成': 5,
+            '已完成': 8,
+            '待确认': 4,
+            '已取消': 6
+        };
+        for (let i in obj) {
+            shuzu.push(obj[i])
+            let o = {};
+            o[i] = obj[i]
+            shuzu1.push(o)
+            shuzu3.push({
+                [i]: obj[i]
+            })
+        }
+    }
+    // 数组转对象
+    function arrayToobj() {
+        let array = [{
+            未完成: 5
+        }, {
+            已完成: 8
+        }, {
+            待确认: 4
+        }, {
+            已取消: 6
+        }];
+        let obj = {}
+        for (let i in array) {
+            obj[i] = array[i]
+        }
+        return obj
+    }
+    // 或者
+    function arrayToobj2() {
+        let array = [{
+            未完成: 5
+        }, {
+            已完成: 8
+        }, {
+            待确认: 4
+        }, {
+            已取消: 6
+        }];
+        return Object.assign({}, array)
+    }
+    // console.log(arrayToobj2())
+    function bianli() {
+        let array = [{
+            未完成: 5
+        }, {
+            已完成: 8
+        }, {
+            待确认: 4
+        }, {
+            已取消: 6
+        }];
+        let obj = {
+            '未完成': '2',
+            'sadsa': '34'
+        }
+        for (var value of array) {
+            console.log(value)
+        }
+        // for (var ee of obj) {
+        //     // console.log(ee)
+        // }
+        for (var ee of Object.entries(obj)) {
+            console.log(ee)
+        }
+        // for (var eee of array.values()) {
+        //     console.log("eee", eee)
+        // }
+        for (var e in array) {
+            console.log(array[e])
+        }
+    }
+    bianli()
+</script>

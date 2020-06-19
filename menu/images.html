@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transition</title>
+    <style>
+        .transition ul {
+            width: 97%;
+        }
+
+        .transition ul li {
+            width: 20%;
+            list-style: none;
+            height: 320px;
+            border: 1px solid salmon;
+            padding-top: 10px;
+            display: inline-block;
+            margin: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .transition ul li img {
+            width: 240px;
+            height: 280px;
+        }
+
+        .transition ul li dt {
+            text-align: center;
+        }
+
+        .transition ul li dd {
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* 也可以用tansform：tranlateY() */
+       
+        .topfloat {
+            position: relative;
+            transition: top .5s;
+            -webkit-transition: top .5s;
+            -moz-transition: top .5s;
+            -o-transition: top .5s;
+            -ms-transition: top .5s;
+            top: 0;
+        }
+
+        .topfloat:hover {
+            top: -20px;
+        }
+
+        .scalebig img {
+            /* 写在一起鼠标移开动画不连贯 */
+            transition: transform .5s;
+            -webkit-transition: transform .5s;
+            -moz-transition: transform .5s;
+            -o-transition: transform .5s;
+            -ms-transition: transform .5s;
+        }
+
+        .scalebig:hover img {
+            transform: scale(1.1, 1.1);
+        }
+
+        .filter {
+            position: relative;
+        }
+
+        .filter img {
+            filter: blur(3px);
+            transition: filter .5s;
+            -webkit-transition: filter .5s;
+            -moz-transition: filter .5s;
+            -o-transition: filter .5s;
+            -ms-transition: filter .5s;
+        }
+
+        .filter:hover img {
+            filter: blur(0);
+        }
+
+        .flash img {
+            animation: flash 5s infinite linear;
+        }
+
+        /* @-o-keyframes */
+        /* @-moz-keyframes
+        @-ms-keyframes
+        @-webkit-keyframes flash  */
+
+        @keyframes flash {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+
+        .reverse img {
+            transition: transform .5s;
+            -webkit-transition: transform .5s;
+            -moz-transition: transform .5s;
+            -o-transition: transform .5s;
+            -ms-transition: transform .5s;
+        }
+
+        .reverse:hover img {
+            transform: rotateY(180deg);
+        }
+
+        .border img {
+            border: 1px solid #000;
+        }
+
+        .border:hover img {
+            animation: borderDispear 4s;
+        }
+
+        @keyframes borderDispear {
+            0% {}
+
+            25% {
+                border-left: none;
+            }
+
+            50% {
+                border-top: none;
+            }
+
+            75% {
+                border-right: none
+            }
+
+            100% {
+                border-bottom: none;
+            }
+        }
+
+        .swing:hover img {
+            animation: swing 1s linear;
+            -webkit-animation: swing 1s linear;
+            -moz-animation: swing 1s linear;
+            -o-animation: swing 1s linear;
+            -ms-animation: swing 1s linear;
+        }
+
+        .filter {
+            position: relative;
+        }
+
+        /* @-o-keyframes */
+        /* @-moz-keyframes
+        @-ms-keyframes
+        @-webkit-keyframes flash  */
+
+        @keyframes swing {
+            20% {
+                -webkit-transform: rotate3d(0, 0, 1, 5deg);
+                transform: rotate3d(0, 0, 1, 5deg);
+            }
+
+            40% {
+                -webkit-transform: rotate3d(0, 0, 1, -5deg);
+                transform: rotate3d(0, 0, 1, -5deg);
+            }
+
+            60% {
+                -webkit-transform: rotate3d(0, 0, 1, 2deg);
+                transform: rotate3d(0, 0, 1, 2deg);
+            }
+
+            80% {
+                -webkit-transform: rotate3d(0, 0, 1, -2deg);
+                transform: rotate3d(0, 0, 1, -2deg);
+            }
+
+            100% {
+                -webkit-transform: rotate3d(0, 0, 1, 0deg);
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+        }
+
+        /*         
+        .filter {
+            position: relative;
+        } */
+        /* .rainborder {
+            position: absolute;
+            margin-left: 92px;
+            margin-top: -101px;
+            border-radius: 100%;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.6);
+            transform: rotateY(0);
+            width: 20px;
+            height: 28px;
+        }
+        
+        .rain {
+            filter: brightness(1.2);
+            position: absolute;
+            margin-left: 90px;
+            margin-top: -100px;
+            background-size: 5vw 5vh;
+            border-radius: 100%;
+            background-image: url("images/images03.jpg");
+            transform: rotate(180deg) rotateY(0);
+            background-position: 48% 54%;
+            width: 24px;
+            height: 28px;
+        } */
+
+        .shadow img {
+            opacity: 0.8;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            /*Reflection*/
+            -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(.7, transparent), to(rgba(0, 0, 0, 0.1)));
+        }
+
+        .shadow:hover img {
+            opacity: 1;
+            /*Reflection*/
+            -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(.7, transparent), to(rgba(0, 0, 0, 0.4)));
+            /*Glow*/
+            -webkit-box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+            -moz-box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .mix {
+            /* 给两张同样的图片，叠加上 青色#0ff 和 红色#f00，并且错开一定的距离， */
+            text-align: left !important;
+            margin: 0 auto;
+            width: 240px;
+            height: 280px;
+            background: url('./images/images07.jpg') #0ff;
+            background-blend-mode: lighten;
+            position: relative;
+        }
+
+        .mix:after {
+            content: '';
+            position: absolute;
+            margin-left: 10px;
+            width: 240px;
+            height: 280px;
+            background: url('./images/images07.jpg')#f00;
+            background-blend-mode: lighten;
+            /* 保持中间叠加部分的原色，叠加一个 mix-blend-mode: darken 反向处理一下。 */
+            mix-blend-mode: darken;
+        }
+
+        /*  */
+
+        .swingH:hover img {
+            animation: swingH 1s linear;
+        }
+
+        @keyframes swingH {
+            20% {
+                transform: translateY(5px);
+            }
+
+            40% {
+                transform: translateY(-5px);
+            }
+
+            60% {
+                transform: translateY(5px);
+            }
+
+            80% {
+                transform: translateY(-5px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .suibian img {
+            transform: translate3D(-50%, -50%);
+        }
+
+        .hoverWidth {
+            border: none !important;
+            position: relative;
+        }
+
+        .hoverWidth:hover img:nth-child(1) {
+            left: 270px;
+        }
+
+        .hoverWidth:hover img:nth-child(2) {
+            left: 540px;
+        }
+
+        .hoverWidth img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            margin: auto;
+            transition: all .5s;
+        }
+
+        .float {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgba(41, 162, 184, 0.4);
+            margin: 0 auto;
+            animation: float ease 3s infinite;
+            /* animation-direction: alternate; */
+            /* -webkit-animation-direction: alternate; */
+        }
+
+        @keyframes float {
+            50% {
+                transform: translateY(10px);
+            }
+
+            0%,100% {
+                transform: translateY(0px);
+            }
+        }
+        .girl{
+            margin: auto;
+            width: 180px;
+            height: 100%;
+            background: url(images/girl.png) no-repeat 0 0;
+        }
+        .girl:hover{
+            animation: move 1s steps(7) infinite;
+            -webkit-animation: move 1s steps(7) infinite;
+        }
+        @keyframes move {
+            100%{
+                background-position: -1260px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="transition">
+        <ul>
+            <li class="topfloat">
+                <dt><img src="./images/images01.jpg"></dt>
+                <dd>整体上浮transition</dd>
+            </li>
+            <li class="scalebig">
+                <dt><img src="./images/images02.jpg"></dt>
+                <dd>图片放大transition、scale</dd>
+            </li>
+            <li class="filter">
+                <dt><img src="./images/images03.jpg"></dt>
+                <dd>图片清晰transition、filter</dd>
+                <!-- <div class="rainborder"></div>
+                <div class="rain"></div> -->
+            </li>
+            <li class="flash">
+                <dt><img src="./images/images04.jpg"></dt>
+                <dd>图片flash效果opacity</dd>
+            </li>
+            <li class="reverse">
+                <dt><img src="./images/images05.jpg"></dt>
+                <dd>图片翻转180deg</dd>
+            </li>
+            <li class="swing">
+                <dt><img src="./images/images06.jpg"></dt>
+                <dd>图片左右抖动</dd>
+            </li>
+            <li class="shadow">
+                <dt><img src="./images/images02.jpg"></dt>
+                <dd>图片倒影效果Webkit内核有效</dd>
+            </li>
+            <li>
+                <dt class="mix"></dt>
+                <dd>混合效果</dd>
+            </li>
+            <li>
+                <dt class="swingH"><img src="./images/images03.jpg"></dt>
+                <dd>translate3D</dd>
+            </li>
+            <li>
+                <dt class="suibian"><img src="./images/images05.jpg"></dt>
+                <dd>随便</dd>
+            </li>
+            <li class="hoverWidth">
+                <img src="./images/images02.jpg">
+                <img src="./images/images03.jpg">
+                <img src="./images/images04.jpg">
+            </li>
+            <li>
+                <div class="float"></div>
+            </li>
+            <li>
+                <div class="girl"></div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

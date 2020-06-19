@@ -1,0 +1,196 @@
+body {
+    background-color: #f5f5f5;
+    height: 100vh;
+    overflow: hidden;
+    color: #fff;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.box {
+    width: 23%;
+    height: 200px;
+    margin-right: 1%;
+    margin-left: 1%;
+    background-color: #fff;
+    float: left;
+    margin-bottom: 30px;
+}
+
+.content {
+    height: 100%;
+    text-align: center;
+    line-height: 200px;
+    font-size: 100px;
+    color: transparent;
+    background-image: linear-gradient(red, green);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.hue {
+    animation: hueRotate 60s linear infinite;
+    filter: hue-rotate(360deg);
+}
+
+@keyframes hueRotate {
+    from {
+        filter: hue-rotate(0);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.bounce {
+    animation: bounce 1s backwards ease;
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateY(-40px);
+    }
+    70% {
+        transform: translateY(0);
+    }
+    80% {
+        transform: translateY(-40px);
+    }
+    0%, 100% {
+        transform: translateY(0);
+    }
+}
+
+.flash {
+    animation: flash 1s linear backwards;
+}
+
+@keyframes flash {
+    from, 50%, to {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}
+
+.pulse {
+    animation: pulse 1s linear backwards;
+}
+
+@keyframes pulse {
+    80% {
+        transform: scale(1.2);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.rubberBand {
+    animation: rubberBand 1s linear backwards;
+}
+
+@keyframes rubberBand {
+    50% {
+        transform: scaleX(1.5);
+    }
+    70% {
+        transform: scaleX(1);
+    }
+    80% {
+        transform: scaleX(1.2);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+.swing{
+    animation:swing .5s linear backwards;
+}
+@keyframes swing{
+    20% {
+        -webkit-transform: rotate3d(0, 0, 1, 15deg);
+        transform: rotate3d(0, 0, 1, 15deg);
+      }
+    
+      40% {
+        -webkit-transform: rotate3d(0, 0, 1, -10deg);
+        transform: rotate3d(0, 0, 1, -10deg);
+      }
+    
+      60% {
+        -webkit-transform: rotate3d(0, 0, 1, 5deg);
+        transform: rotate3d(0, 0, 1, 5deg);
+      }
+    
+      80% {
+        -webkit-transform: rotate3d(0, 0, 1, -5deg);
+        transform: rotate3d(0, 0, 1, -5deg);
+      }
+    
+      to {
+        -webkit-transform: rotate3d(0, 0, 1, 0deg);
+        transform: rotate3d(0, 0, 1, 0deg);
+      }
+}
+.bouceInLeft{
+    animation: bouceInLeft .5s linear backwards;
+}
+@keyframes bouceInLeft{
+    0%{
+        transform: translateX(-50vw) scale(1.5);
+    }
+    50%{
+        transform: translateX(0);
+    }
+    60%{
+        transform: translateX(10px);
+    }
+    70%{
+        transform: translateX(-8px);
+    }
+    80%{
+        transform: translateX(5px);
+    }
+    90%{
+        transform: translateX(-5px);
+    }
+    100%{
+        transform: translateX(0) scale(1);
+    }
+}
+.hinge{
+    animation: hinge 2s ease-in-out backwards;
+}
+@keyframes hinge{
+    10%{
+        transform: rotate3d(0,0,1,75deg);
+    }
+    50%{
+        transform: rotate3d(0,0,1,70deg);
+    }
+    70%{
+        transform: rotate3d(0,0,1,80deg);
+    }
+    100%{
+       transform: translateY(500px);
+    }
+}
+.mengban{
+    animation: mengban 5s linear infinite;
+    background: url(../images/images06.jpg) no-repeat left;
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+}
+@keyframes mengban{
+    from{
+        background-position: left;
+    }
+    to{
+        background-position: right;
+    }
+}

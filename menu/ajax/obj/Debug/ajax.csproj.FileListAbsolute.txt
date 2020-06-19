@@ -1,0 +1,4 @@
+D:\menu\ajax\bin\ajax.dll
+D:\menu\ajax\bin\ajax.pdb
+D:\menu\ajax\obj\Debug\ajax.dll
+D:\menu\ajax\obj\Debug\ajax.pdb

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./lib/layui-v2.5.6/layui/css/layui.css">
+    <title>ajax</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div style="padding:10px;margin: 10px;">
+    </div>
+</body>
+
+</html>
+<script src="./lib/jquery/jquery.js "></script>
+<script>
+    $(function() {
+        var myurl = "http://v.juhe.cn/dream/category";
+
+        $.ajax({
+            url: myurl + '?key=34512e795fd3a1e5e50053fc82f8247d',
+            type: "GET",
+            dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data)
+            },
+            error: function() {
+
+            }
+        })
+
+        function getData() {
+            console.log(data)
+        }
+    })
+</script>

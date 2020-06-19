@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .imgbox {
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .imgbox img {
+            width: 480px;
+            height: 480px;
+            transition: all .5s;
+            max-width: 1024px;
+            max-height: 1024px;
+        }
+        
+        .download {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 25px;
+            text-align: center;
+            height: 65px;
+            line-height: 30px;
+            background-color: rgb(96, 98, 211);
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="lib/jquery/jquery.js"></script>
+    <script>
+        winWidth = $(window).width();
+        winHeight = $(window).height();
+        $('.imgbox').css({
+            'width': winWidth,
+            'height': winHeight,
+            'line-height': winHeight
+        })
+    </script>
+</head>
+
+<body>
+    <p class="imgbox">
+        <img src="images/images01.jpg" onmouseover="zoom()">
+        <p class="download">下载</p>
+    </p>
+    <script>
+        $('.download').click(function() {
+            $('body').append(`<a class='ad' download href='images/images01.jpg'></a>`)
+            $('ad').click()
+        })
+        var winWidth, winHeight;
+        $(window).resize(function() {
+            winWidth = $(window).width();
+            winHeight = $(window).height();
+            $('.imgbox').css({
+                'width': winWidth,
+                'height': winHeight,
+                'line-height': winHeight + 'px'
+            })
+        })
+
+        function zoom() {
+            $('.imgbox').bind('mousewheel', function(e) {
+                var imgWidth = $(this).find('img').width()
+                var imgHeight = $(this).find('img').height();
+                // console.log(imgWidth, imgHeight)
+                var wheel = e.originalEvent.wheelDelta;
+                if (wheel) {
+                    e.preventDefault;
+                    if (wheel > 0) {
+                        $('.imgbox img').css({
+                            'width': imgWidth * 1.2,
+                            'height': imgHeight * 1.2
+                        })
+                    } else {
+                        $('.imgbox img').css({
+                            'width': imgWidth / 1.2,
+                            'height': imgHeight / 1.2
+                        })
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent {
+            width: 100%;
+            /* font-size: 42px; */
+        }
+        
+        .child {
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            background-color: aqua;
+            display: inline-block;
+            font-size: 16px;
+        }
+        
+        .parent1 {
+            font-size: 0;
+        }
+        .parent3 {
+            font-size: 42px;
+        }
+        .parent3 .child{
+            margin-left: -12.6px;
+        }
+        .parent4{
+            display:table;
+            word-spacing:-1em
+        }
+    </style>
+</head>
+
+<body>
+    <h3>inline-blcok块之间的不可见符号会被保留父层字体的1/3大小的空间</h3>
+    <h3>实际测试间隙没有1/3</h3>
+    <div class="parent">
+        <div class="child">1</div>
+        <div class="child">2</div>
+        <div class="child">3</div>
+        <div class="child">4</div>
+    </div>
+    <h3>解决方式一：parent设置font-size：0;子元素设置font-szie</h3>
+    <div class="parent1">
+        <div class="child">5</div>
+        <div class="child">6</div>
+        <div class="child">7</div>
+        <div class="child">8</div>
+    </div>
+    <h3>解决方式二：代码写在一行，可结合代码打包工具使用</h3>
+    <div class="parent2">
+        <div class="child">5</div><div class="child">6</div><div class="child">7</div><div class="child">8</div>
+    </div>
+    <h3>解决方式三：子元素设置margin-left为负值</h3>
+    <p>设置子元素的margin-left为0，但是元素之间的间隙大小是根据上下文的字体大小确定的，而每个浏览器的换行空隙大小不同，如果font-szie：16px,chrome空隙为8px,火狐空隙为4px.所以这个方法不通用。</p>
+    <div class="parent3">
+        <div class="child">9</div>
+        <div class="child">10</div>
+        <div class="child">11</div>
+        <div class="child">12</div>
+    </div>
+    <h3>解决方式四：父元素 display:table;word-spacing:-1em;</h3>
+    <div class="parent4">
+        <div class="child">13</div>
+        <div class="child">14</div>
+        <div class="child">15</div>
+        <div class="child">16</div>
+    </div>
+</body>
+
+</html>

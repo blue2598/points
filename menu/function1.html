@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script src="lib/jquery/jquery.js"></script>
+</head>
+
+<body>
+    <div>Math.log()返回一个数的自然对数</div>
+    <div>Math.pow(a,b)返回一个a的b次方</div>
+    <div>
+        <input id='num' type="number" />
+        <button onclick="changeFn()">转换</button>
+    </div>
+    <script>
+        function changeFn() {
+            var num = $('#num').val();
+            if (num)
+                handleFn(num)
+            else
+                alert('请输入有效数字')
+        }
+
+        function handleFn(val) {
+            var result = {};
+            var size = ["", "万", "亿", "万亿"],
+                i;
+            if (val < 10000) {
+                result.value = val;
+                result.unit = ''
+            } else {
+                i = Math.floor(Math.log(val) / Math.log(10000));
+                result.value = (val / Math.pow(10000, i)).toFixed(2);
+                result.unit = size[i];
+                $('body').append(result.value + result.unit)
+            }
+            console.log(result)
+            return result
+        }
+    </script>
+</body>
+
+</html>

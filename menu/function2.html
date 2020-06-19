@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echart图表</title>
+    <script src="lib/echart/echarts.min.js"></script>
+    <style>
+        #main {
+            width: 90%;
+            height: 90vh;
+            margin: 0 auto;
+        }
+        
+        #calendar {
+            width: 90%;
+            height: 90vh;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <div id="calendar"></div>
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            color: ['#37A2DA', '#32C5E9', '#67E0E3', '#9FE6B8', '#FFDB5C', '#ff9f7f', '#fb7293', '#E062AE', '#E690D1', '#e7bcf3', '#9d96f5', '#8378EA', '#96BFFF'],
+            itemStyle: {
+                // 阴影的大小
+                // shadowBlur: 100,
+                // 阴影水平方向上的偏移
+                // shadowOffsetX: 0,
+                // 阴影垂直方向上的偏移
+                // shadowOffsetY: 0,
+                // 阴影颜色
+                // shadowColor: 'rgba(0, 0, 0, 0.5)'
+            },
+            dataZoom: [{
+                type: 'slider', //x轴可拖动缩放
+                xAxisIndex: 0,
+                start: 10, // 左边在 10% 的位置。
+                end: 60 // 右边在 60% 的位置。
+            }, {
+                type: 'inside', //x轴 可用滚轮进行缩放
+                xAxisIndex: 0,
+                start: 10,
+                end: 60
+            }, {
+                type: 'slider',
+                yAxisIndex: 0,
+                start: 30,
+                end: 80
+            }, {
+                type: 'inside',
+                yAxisIndex: 0,
+                start: 30,
+                end: 80
+            }],
+            tooltip: {},
+            legend: {
+                data: ['销量']
+            },
+            xAxis: {
+                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('calendar'));
+        // 模拟数据
+        function getVirtulData(year) {
+            year = year || '2017';
+            var date = +echarts.number.parseDate(year + '-01-01');
+            var end = +echarts.number.parseDate(year + '-12-31');
+            var dayTime = 3600 * 24 * 1000;
+            var data = [];
+            for (var time = date; time <= end; time += dayTime) {
+                data.push([
+                    echarts.format.formatTime('yyyy-MM-dd', time),
+                    Math.floor(Math.random() * 10000)
+                ]);
+            }
+            return data;
+        }
+        // 指定图表的配置项和数据
+        var option2 = {
+            visualMap: {
+                show: false,
+                min: 0,
+                max: 10000
+            },
+            calendar: {
+                range: '2017'
+            },
+            series: {
+                type: 'heatmap',
+                coordinateSystem: 'calendar',
+                data: getVirtulData(2017)
+            }
+        };
+        myChart2.setOption(option2);
+    </script>
+</body>
+
+</html>

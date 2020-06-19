@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>输入框数值相加</title>
+    <link rel="stylesheet" href="./lib/layui-v2.5.6/layui/css/layui.css">
+    <style>
+        .input {
+            margin: 10px;
+            width: 80%;
+        }
+        
+        .input input {
+            width: 20%;
+            margin: 10px;
+            display: inline-block;
+            border-color: #666;
+        }
+        
+        .input span {
+            display: block;
+            margin: 10px;
+            height: 50px;
+            line-height: 50px;
+        }
+        
+        .code {
+            height: 400px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input" id="numInput">
+        <span id="sum">总和是：</span>
+        <span id="average">平均值：</span>
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+        <input type="number" name="number" class="layui-input">
+    </div>
+    <div class="input">
+        <input type='num' class="layui-input" onchange='this.value=cc(this.value)' placeholder="请输入数值">
+        <span id="rmb" style="display: inline-block;"></span>
+    </div>
+    <div class="input">
+        <input type='text' class="layui-input" onchange='countStr(this.value)' placeholder="请输入字符串" />
+        <span id="countStr" style="display: inline-block;">出现最多的字符是</span>
+    </div>
+    <div class="code">
+        <pre class="layui-code" lay-title="JavaScript" lay-skin="notepad">
+            // 计算总和，平均数
+            $('input[name="number"]').val(0);
+            $('#numInput').on('input propertychange', function() {
+                    var sum = 0;
+                    var length = $('input[name="number"]').length
+                    var average = 0;
+                    $('input[name="number"]').each(function() {
+                        sum += parseFloat($(this).val());
+                        average = parseFloat(sum / length)
+                        if (!NaN) {
+                            $('#sum').text('总和是：' + sum)
+                            $('#average').text('平均值：' + average)
+                        } else {
+                            $('#sum').text('输入有误')
+                            $('#average').text('输入有误')
+                        }
+                    })
+                })
+                // 千分位分隔
+            function cc(s) {
+                if (/[^0-9\.]/.test(s)) return "invalid value";
+                s = s.replace(/^(\d*)$/, "$1.");
+                s = (s + "00").replace(/(\d*\.\d\d)\d*/, "$1");
+                s = s.replace(".", ",");
+                var re = /(\d)(\d{3},)/;
+                while (re.test(s))
+                    s = s.replace(re, "$1,$2");
+                s = s.replace(/,(\d\d)$/, ".$1");
+                $('#rmb').text('￥' + s.replace(/^\./, "0."))
+                return "￥" + s.replace(/^\./, "0.")
+            }
+            // 判断字符串出现最多的字符
+            function countStr(str) {
+                var obj = {};
+                for (var i = 0, l = str.length, k; i < l; i++) {
+                    k = str.charAt(i);
+                    if (obj[k]) {
+                        obj[k]++;
+                    } else {
+                        obj[k] = 1;
+                    }
+                }
+                var m = 0,
+                    i = null;
+                for (var k in obj) {
+                    if (obj[k] > m) {
+                        m = obj[k];
+                        i = k;
+                    }
+                }
+                $("#countStr").text('出现最多的字符是：' + i + ',出现了' + m + '次')
+                return i + ':' + m;
+            }
+        </pre>
+    </div>
+</body>
+
+</html>
+<script src="./lib/jquery/jquery.js"></script>
+<script>
+    // 计算总和，平均数
+    $('input[name="number"]').val(0);
+    $('#numInput').on('input propertychange', function() {
+            var sum = 0;
+            var length = $('input[name="number"]').length
+            var average = 0;
+            $('input[name="number"]').each(function() {
+                sum += parseFloat($(this).val());
+                average = parseFloat(sum / length)
+                if (!NaN) {
+                    $('#sum').text('总和是：' + sum)
+                    $('#average').text('平均值：' + average)
+                } else {
+                    $('#sum').text('输入有误')
+                    $('#average').text('输入有误')
+                }
+            })
+        })
+        // 千分位分隔
+    function cc(s) {
+        if (/[^0-9\.]/.test(s)) return "invalid value";
+        s = s.replace(/^(\d*)$/, "$1.");
+        s = (s + "00").replace(/(\d*\.\d\d)\d*/, "$1");
+        s = s.replace(".", ",");
+        var re = /(\d)(\d{3},)/;
+        while (re.test(s))
+            s = s.replace(re, "$1,$2");
+        s = s.replace(/,(\d\d)$/, ".$1");
+        $('#rmb').text('￥' + s.replace(/^\./, "0."))
+        return "￥" + s.replace(/^\./, "0.")
+    }
+    // 判断字符串出现最多的字符
+    function countStr(str) {
+        var obj = {};
+        for (var i = 0, l = str.length, k; i < l; i++) {
+            k = str.charAt(i);
+            if (obj[k]) {
+                obj[k]++;
+            } else {
+                obj[k] = 1;
+            }
+        }
+        var m = 0,
+            i = null;
+        for (var k in obj) {
+            if (obj[k] > m) {
+                m = obj[k];
+                i = k;
+            }
+        }
+        $("#countStr").text('出现最多的字符是：' + i + ',出现了' + m + '次')
+        return i + ':' + m;
+    }
+</script>
