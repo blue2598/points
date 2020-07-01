@@ -164,6 +164,7 @@ body::-webkit-scrollbar {
 }
 .hinge{
     animation: hinge 2s ease-in-out backwards;
+    transform-origin: 10% 30%; 
 }
 @keyframes hinge{
     10%{

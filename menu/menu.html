@@ -41,7 +41,6 @@
                 <li class="layui-nav-item"><a href="javascript:;">大数据</a></li>
             </ul>
         </div>
-
         <div class="show">
             <div class="tab-label">
                 <ul>
@@ -54,34 +53,6 @@
             <iframe id="iframebox1" name="framebox" src="index.html" frameborder='none'></iframe>
         </div>
     </div>
-    <div class="container">
-        <div class="menutop">
-            <ul class="layui-nav">
-                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-                <li class="layui-nav-item">
-                    <a href="javascript:;">菜单</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="index.html" target="frameboxb">零散知识点</a></dd>
-                        <dd><a href="images.html" target="frameboxb">选项2</a></dd>
-                        <dd><a href="html3.html" target="frameboxb">跳转</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">菜单一</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="html1.html" target="frameboxb">移动模块</a></dd>
-                        <dd><a href="hover.html" target="frameboxb">后台模版</a></dd>
-                        <dd><a href="html3.html">电商平台</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="javascript:;">产品</a></li>
-                <li class="layui-nav-item"><a href="javascript:;">大数据</a></li>
-            </ul>
-        </div>
-        <div class="showbottom">
-            <iframe name="frameboxb" src="index.html" frameborder='none'></iframe>
-        </div>
-    </div>
 </body>
 
 </html>
@@ -90,12 +61,12 @@
 <script src="lib/layui-v2.5.6/layui/layui.all.js"></script>
 <script src="js/index.js"></script>
 <script>
-    $('#iframebox1').bind('mousewheel', function(e) {
+    $('#iframebox1').bind('mousewheel', function (e) {
         var wheeld = e.originalEvent.wheelDelta;
         console.log(wheeld)
         e.preventDefault();
     })
-    $('a[target="framebox"]').click(function() {
+    $('a[target="framebox"]').click(function () {
         $('.tab-label ul li').removeClass('active')
         var itemName = $(this).text().replace(/[\r\n]/g, "").replace(/\ +/g, "");
         var itemHref = $(this).attr('href');
@@ -110,7 +81,7 @@
         var labelItems = [];
         var labelItem;
         var isExist;
-        $('.tab-label ul li a').each(function() {
+        $('.tab-label ul li a').each(function () {
             var that = $(this)
             console.log(that.parent().attr('data-id'))
             if (that.parent().attr('data-id') == dataId) {
@@ -118,7 +89,7 @@
             }
             labelItem = that.text().replace(/[\r\n]/g, "").replace(/\ +/g, "")
             labelItems.push(labelItem) //去回车换行、空格
-            isExist = labelItems.some(function(item, index) {
+            isExist = labelItems.some(function (item, index) {
                 return item == itemName
             })
         })
@@ -126,11 +97,11 @@
             $('.tab-label ul').append(li);
         }
     })
-    $('.tab-label ul').mouseenter(function() {
-        $('.tab-label ul li').bind('click', function() {
+    $('.tab-label ul').mouseenter(function () {
+        $('.tab-label ul li').bind('click', function () {
             $(this).addClass('active').siblings().removeClass('active')
         })
-        $('.tab-label ul li span').bind('click', function() {
+        $('.tab-label ul li span').bind('click', function () {
             var framesrc = $(this).parent().next().find('a').attr('href')
             if (framesrc) {
                 //点击中间元素，该元素后一项加active

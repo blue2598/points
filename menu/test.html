@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <link rel="stylesheet" href="test.css">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cf:after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        .wrap {
+            width: 100%;
+            height: 100%;
+        }
+
+        .left {
+            width: 17.75%;
+            background: #ccc;
+        }
+
+        .map-box {
+            position: relative;
+        }
+
+        .right {
+            width: 13.75%;
+            background: #999;
+        }
+
+        /*float法*/
+        .float .left {
+            float: left;
+            height: 100%
+        }
+
+        .float .map-box {
+            margin: 0 13.75% 0 17.75%;
+            height: 100%
+        }
+
+        .float .right {
+            float: right;
+            height: 100%
+        }
+
+        .map-box .arrow {
+            color: #fff;
+            bottom: 0px;
+            position: absolute;
+            background-color: #1d3c88;
+            width: 16px;
+            height: 26px;
+            cursor: pointer;
+            line-height: 26px;
+            z-index: 999;
+        }
+
+        .map-box .leftarr {
+            left: -16px;
+        }
+
+        .map-box .rightarr {
+            right: -16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap float cf">
+        <div class="left" data-show='1'></div>
+        <div class="right" data-show='1'></div>
+        <div class="map-box">
+            <!-- <marquee style="height: 140px;" width='500px' behavior="scroll" scrollamount="10" direction="up" onmouseover=this.stop() onmouseout=this.start()>
+                <div>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;综合业务网理论及关键技术国家重点实验室于1989年由国家计委批准立项，1991年开始建设。实验室于1995年10月通过国家验收，并正式投入开放运行，分别于2002年、2007年和2012年三次通过国家评估。现任实验室主任高新波教授，学术委员会主任于全院士。实验室依托于信息与通信工程以及军队指挥学两个国家一级学科，目前主要研究方向包括“通信网络体系架构及关键技术”，“高效信源和信道编码技术”，“信息传输理论与技术”，“信息安全及密码理论与技术”。
+                    </p>
+                </div>
+            </marquee> -->
+            <!-- 左右箭头 -->
+            <div class="buttons">
+                <a class="btn">BUTTON</a>
+                <a class="btn">BUTTON</a>
+                <a class="btn">BUTTON</a>
+                <a class="btn1">BUTTON</a>
+                <a class="btn0">BUTTON
+                    <i></i>
+                    <i></i>
+                </a>
+            </div>
+            <div class="arrow leftarr"><i class="iconfont icon-zuojiantou"></i></div>
+            <div class="arrow rightarr"><i class="iconfont icon-youjiantou"></i></div>
+
+            <a class="btn0">BUTTON
+                <i></i>
+                <i></i>
+            </a>
+        </div>
+    </div><br />
+</body>
+<script src="lib/jquery/jquery.js"></script>
+<script>
+    $('.leftarr').on('click', function () {
+        var isShow = $('.left').attr('data-show')
+        if (isShow == "1") {
+            $('.left').hide()
+            $('.map-box').css('margin-left', '16px')
+        } else {
+            $('.left').show()
+            $('.map-box').css('margin-left', '.17.75%')
+        }
+    })
+    $('.rightarr').on('click', function () {
+        var isShow = $('.right').attr('data-show')
+        if (isShow == "1") {
+            $('.right').hide()
+            $('.map-box').css('margin-right', '16px')
+        } else {
+            $('.right').show()
+            $('.map-box').css('margin-left', '.13.75%')
+        }
+    })
+    $('body').click(function (e) {
+        createCircle(e.clientX, e.clientY)
+    })
+    function createCircle(x, y) {
+        for (let i = 0; i < 30; i++) {
+            let w = Math.random() * 30 - 20;
+            let rgbR = Math.random() * 255;
+            let rgbG = Math.random() * 255;
+            let rgbB = Math.random() * 255;
+            translateX = Math.random() * 100 - 50;
+            translateY = Math.random() * 100 - 50;
+            console.log(rgbR)
+            var html = `<span class='circle' style='width:${w}px;height:${w}px;left:${x}px;top:${y}px;transform:translate3D(${translateX}px,${translateY}px,0);background-color:rgba(${rgbR},${rgbG},${rgbB},${Math.random()})'></span>`;
+            $('body').append(html)
+        }
+        $('.circle').animate({
+            'width': '+=10px',
+            'height': '+=10px'
+        }, 1500, function () {
+            $('.circle').remove()
+        })
+    }
+
+</script>
+
+</html>
